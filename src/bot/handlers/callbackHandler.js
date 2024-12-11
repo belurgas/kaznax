@@ -1,5 +1,5 @@
 // Обработка callback'ов от inline кнопок
-import { bot } from "../../bot/index.js";
+import { bot } from "../index.js";
 
 export const callbackHandler = (ctx) => {
     const callbackData = ctx.callbackQuery.data;
@@ -7,7 +7,7 @@ export const callbackHandler = (ctx) => {
   
     if (callbackData === 'next_after_reg') {
       bot.telegram.deleteMessage(userId, ctx.callbackQuery.message.message_id);
-      bot.telegram.sendMessage(userId, '*Можете заглянуть на главную ➡️ /start страницу, а так ждите субботу*', {
+      bot.telegram.sendMessage(userId, '*На этом пока всё. Отслаьное будет в субботу*', {
         parse_mode: 'MarkdownV2',
       });
     } else {

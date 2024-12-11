@@ -18,17 +18,12 @@ export async function POST(request: NextRequest) {
 
         const user = await users.findOne({ telegram_id });
 
-        if (user && user.photo_url) {
+        if (user) {
 
             return NextResponse.json(
                 { user },
                 { status: 200 }
-            );
-        } else if (user){
-            return NextResponse.json(
-                { user },
-                { status: 200 }
-            );
+            ); 
         } else {
             return NextResponse.json(
                 { photo_url: "get_from_tg" },

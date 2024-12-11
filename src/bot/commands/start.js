@@ -8,7 +8,7 @@ export const startCommand = async (ctx) => {
     console.log(user);
     if (user?.role === "USER") {
         // Вывод меню для обычных пользователей
-        ctx.reply("Привет...")
+        ctx.reply("Ждём субботы")
     } else if (user?.role === "ADMIN") {
         // Вывод меню для админов
         ctx.reply("Привет админ...")
