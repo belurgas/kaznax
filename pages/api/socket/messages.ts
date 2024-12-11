@@ -1,5 +1,5 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import formidable, { IncomingForm } from "formidable";
+import { IncomingForm } from "formidable";
 import { MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import fs from 'fs/promises';
@@ -29,7 +29,7 @@ export default async function handler(
 
     const addUserCard = async (telegram_id: number, photo_url: string) => {
         console.log(process.env.MONGODB_URI)
-        const client = new MongoClient("mongodb://localhost:27017/");
+        const client = new MongoClient("mongodb://gen_user:L66ZP$l%5CGz%7C%3C7X@109.71.245.106:27017/default_db?authSource=admin&directConnection=true");
         await client.connect();
         const db = client.db("kaznax");
         const users = db.collection("usersCard");
@@ -68,6 +68,8 @@ export default async function handler(
 
         const fileValue = files[data.telegram_id as string][0];
 
+        let s3PhotoUrl: string = "https://s3.timeweb.cloud/8f8b2e5c-7d3d88b1-cdba-428e-a439-080dc0a97ec5/";
+
         if (fileValue) {
             const filePath = fileValue.filepath;
             // Чтение содержимого файла и преобразование в Buffer
@@ -90,9 +92,13 @@ export default async function handler(
               Body: fileBuffer, // Отправляем Buffer
               ContentType: fileValue.mimetype,
             });
-      
+            
             await s3Client.send(command);
+            s3PhotoUrl += `${data.telegram_id}_card.png`;
             console.log("Файл успешно загружен в S3");
+
+            await addUserCard(data.telegram_id, s3PhotoUrl);
+            (res.socket as any).server.io?.emit("add_card", data.telegram_id)
           }
     
         res.status(200).json({ message: 'Форма успешно обработана', fields, files });
@@ -102,28 +108,28 @@ export default async function handler(
       }
 
 
-    try {
-        const { telegram_id, message, type, photo_url } = req.body;
-        console.log(req.body)
+    // try {
+    //     const { telegram_id, message, type, photo_url } = req.body;
+    //     console.log(req.body)
 
-        if (type === "add_card") {
-            await addUserCard(telegram_id, photo_url);
-            (res.socket as any).server.io?.emit("add_card", telegram_id)
-        }
+    //     if (type === "add_card") {
+    //         await addUserCard(telegram_id, photo_url);
+    //         (res.socket as any).server.io?.emit("add_card", telegram_id)
+    //     }
 
-        if (message) {
-            (res.socket as any).server.io?.emit("golos", message) 
-        } else if (telegram_id) {
-            (res.socket as any).server.io?.emit("golos", telegram_id) 
-        } else {
-            return res.status(400).json({error: "Нету блять сообщения"});
-        }
+    //     if (message) {
+    //         (res.socket as any).server.io?.emit("golos", message) 
+    //     } else if (telegram_id) {
+    //         (res.socket as any).server.io?.emit("golos", telegram_id) 
+    //     } else {
+    //         return res.status(400).json({error: "Нету блять сообщения"});
+    //     }
 
         
 
-        return res.status(200).json({message: req.body});
-    } catch (error) {
-        console.log("[MESSAGE_PSOT] ОШИБКА БЛОКА TRY");
-        return res.status(500).json({message: "Internal error"})
-    }
+    //     return res.status(200).json({message: req.body});
+    // } catch (error) {
+    //     console.log("[MESSAGE_PSOT] ОШИБКА БЛОКА TRY");
+    //     return res.status(500).json({message: "Internal error"})
+    // }
 }

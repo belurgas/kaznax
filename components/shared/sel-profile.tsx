@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { closeMiniApp, hapticFeedback, parseInitData, retrieveLaunchParams } from "@telegram-apps/sdk";
 import { DialogAvatar } from "./avatar-change";
 import { motion } from "framer-motion";
-import { NextResponse } from "next/server";
 
 export function ProfileMain() {
   const [fullName, setFullName] = useState<string | null>(null);
@@ -15,7 +14,6 @@ export function ProfileMain() {
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [updateSuccess, setUpdateSuccess] = useState<boolean | null>(null);
 
   // Получение данных о фото из базы данных
   const getFromDbPhoto = async (userId: number, a: any) => {
@@ -82,7 +80,6 @@ export function ProfileMain() {
   async function handleSendData() {
     hapticFeedback.impactOccurred("medium");
     setIsLoading(true);
-    setUpdateSuccess(null);
 
     try {
       let s3PhotoUrl: string | undefined;
@@ -100,7 +97,6 @@ export function ProfileMain() {
           username: username,
           role: role,
         }));
-        console.log(formData);
 
         const responses = await fetch('/api/updateUser', {
           method: 'POST',
@@ -108,7 +104,6 @@ export function ProfileMain() {
         });
 
         if (!responses.ok) throw new Error('Ошибка при загрузке файлов');
-        setUpdateSuccess(true);
       } else {
         const response = await fetch("/api/updateUser", {
           method: "PATCH",
@@ -124,7 +119,6 @@ export function ProfileMain() {
 
         const data = await response.json();
         if (!response.ok) throw new Error(data.message || 'Ошибка сохранения данных');
-        setUpdateSuccess(true);
       }
 
       const resa = await sendMessageToUser(telegramId, "edited");
@@ -136,7 +130,6 @@ export function ProfileMain() {
       }
     } catch (error) {
       console.error("Ошибка при обработке данных:", error);
-      setUpdateSuccess(false);
     } finally {
       setIsLoading(false);
     }

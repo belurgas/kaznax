@@ -6,7 +6,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { closeMiniApp, hapticFeedback, parseInitData, retrieveLaunchParams } from "@telegram-apps/sdk";
 import { DialogAvatar } from "./avatar-change";
 import { motion } from "framer-motion";
-import { NextResponse } from "next/server";
 
 export function ProfileForm() {
   const [fullName, setFullName] = useState<string | null>(null);
@@ -79,7 +78,7 @@ export function ProfileForm() {
       let s3PhotoUrl: string | undefined;
 
       if (userPhoto.startsWith("blob:")) {
-        const response = await fetch(userPhoto);
+        const response = await fetch(userPhoto);  
 
         if (!response.ok) throw new Error(`Ошибка при получении данных: ${response.statusText}`);
 
@@ -183,7 +182,7 @@ export function ProfileForm() {
         <div className="flex items-center gap-4 justify-center">
           <div className="flex-shrink-0">
             <Avatar className="w-[80px] h-[80px]">
-              <AvatarImage className="w-full h-full" src={userPhoto || ""} />
+              <AvatarImage className="w-full h-full"  src={userPhoto || ""} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>

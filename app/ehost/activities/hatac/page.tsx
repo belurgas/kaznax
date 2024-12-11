@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { expandViewport, hapticFeedback, init, isMiniAppMounted, miniAppHeaderColor, mountMiniApp, parseInitData, retrieveLaunchParams, setMiniAppHeaderColor } from "@telegram-apps/sdk";
 import { useEffect, useRef, useState } from "react";
-import { set } from "react-hook-form";
 import { useRouter } from 'next/navigation';
 import { Input } from "@/components/ui/input";
 
@@ -28,14 +27,13 @@ const sendMessage = async (formData: any) => {
     console.log(data);  // Отвечает ли сервер с правильным сообщением
 };
 
-// Функция для получения фотки от пользователя
-const getPhoto = async () => {
+// // Функция для получения фотки от пользователя
+// const getPhoto = async () => {
 
-}
+// }
 
 export default function HatAct() {
   const [telegramId, setTelegramId] = useState<number>(0);
-  const [photoUrl, setPhotoUrl] = useState<string>('');
   const [isRegistred, setIsRegistred] = useState(false);
 
   const [imagePreview, setImagePreview] = useState<string>('https://s3.timeweb.cloud/8f8b2e5c-7d3d88b1-cdba-428e-a439-080dc0a97ec5/shlyaa.png');
@@ -126,9 +124,8 @@ export default function HatAct() {
       if (a?.user) {
         setTelegramId(a.user.id || 0);
         isUserTrue(a.user.id);
-        setPhotoUrl(a.user.photoUrl || '');
       }
-  }, [telegramId])
+  }, [telegramId, router])
 
     return (
         <div className="flex flex-col gap-4 justify-center items-center h-screen w-screen bg-gray-100">
