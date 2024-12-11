@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
           { status: 400 }
         );
     } else {
-        const client = new MongoClient("mongodb://gen_user:L66ZP$l%5CGz%7C%3C7X@109.71.245.106:27017/default_db?authSource=admin&directConnection=true");
+        const client = new MongoClient("mongodb://gen_user:N%3Eyp10S6%5C%24%5Ca%5Cw@195.133.73.180:27017/default_db?authSource=admin&directConnection=true");
         await client.connect();
         const db = client.db("kaznax");
         const users = db.collection("users");
