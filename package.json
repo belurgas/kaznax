@@ -2,16 +2,16 @@
   "name": "kaznax",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"node src/index.js\" \"next start\" ",
     "lint": "next lint"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.705.0",
     "@hookform/resolvers": "^3.9.1",
-    "@prisma/client": "^6.0.1",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
@@ -24,6 +24,7 @@
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
     "embla-carousel-react": "^8.5.1",
     "express": "^4.21.2",
     "formidable": "^3.5.2",
@@ -42,21 +43,23 @@
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "telegraf": "^4.16.3",
     "ws": "^8.18.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/canvas-confetti": "^1.6.4",
+    "@types/express": "^5.0.0",
     "@types/formidable": "^3.4.5",
     "@types/jquery": "^3.5.32",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/ws": "^8.5.13",
+    "concurrently": "^9.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.16",
     "postcss": "^8",
-    "prisma": "^6.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
