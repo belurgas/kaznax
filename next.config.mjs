@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    headers: [
-        {
-          key: 'X-Accel-Buffering',
-          value: 'no',
-       },
-    ],
+    output: 'export',
     images: {
         dangerouslyAllowSVG: true,
         remotePatterns: [
