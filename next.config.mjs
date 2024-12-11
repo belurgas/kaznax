@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    headers: [
+        {
+          key: 'X-Accel-Buffering',
+          value: 'no',
+       },
+    ],
     images: {
         dangerouslyAllowSVG: true,
         remotePatterns: [
