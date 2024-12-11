@@ -7,7 +7,7 @@ export const callbackHandler = (ctx) => {
   
     if (callbackData === 'next_after_reg') {
       bot.telegram.deleteMessage(userId, ctx.callbackQuery.message.message_id);
-      bot.telegram.sendMessage(userId, '*На этом пока всё. Отслаьное будет в субботу*', {
+      bot.telegram.sendMessage(userId, '*На этом пока всё\\. Отслаьное будет в субботу*', {
         parse_mode: 'MarkdownV2',
       });
     } else {
