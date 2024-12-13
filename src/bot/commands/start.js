@@ -63,7 +63,7 @@ export const startCommand = async (ctx) => {
                         inline_keyboard: [
                             [{
                                 text: 'Открывай',
-                                web_app: { url: process.env.WEB_APP_URL || '' }
+                                web_app: { url: process.env.WEB_APP_URL || '' },
                             }],
                         ],
                     },

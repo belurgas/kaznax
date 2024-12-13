@@ -155,7 +155,7 @@ const TypingEffectWithCursor = ({
                           launchConfettiWithHaptics(); // Запуск конфетти и вибраций
                           setPressedHapButton2(true); // Обновление состояния
                           setShowConfettiButton(false); // Скрыть кнопку
-                        }}>Поздравил 😉</Button>
+                        }}>Поздравил/a 😉</Button>
                       </div>
                     ) : (
                       <>
@@ -170,7 +170,7 @@ const TypingEffectWithCursor = ({
                             launchConfettiWithHaptics(); // Запуск конфетти и вибраций
                             setPressedHapButton2(true); // Обновление состояния
                             setShowConfettiButton(false); // Скрыть кнопку
-                          }}>Уже поздравил 🥳</Button>
+                          }}>Уже поздравил/a 🥳</Button>
                         </div>
                       </>
                     )
