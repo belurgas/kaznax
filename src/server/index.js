@@ -39,6 +39,27 @@ app.post("/receive-data", async (req, res) => {
     }
 })
 
+app.post("/send-message", async (req, res) => {
+    console.log(req.body);
+    try {
+        const { userId, buttons, message } = req.body;
+        for (let i of userId) {
+            if (buttons) {
+                await bot.telegram.sendMessage(i, message, {
+                    reply_markup: {
+                        inline_keyboard: buttons,
+                    }
+                });
+            } else {
+                await bot.telegram.sendMessage(i, message);
+            }
+        }
+        res.status(200).send({ success: true });
+    } catch (error) {
+        res.status(400).send({ error: error.message });
+    }
+})
+
 export default function startServer() {
     const PORT = config.serverPort;
     app.listen(PORT, () => {

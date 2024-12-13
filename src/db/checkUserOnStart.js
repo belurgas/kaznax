@@ -20,3 +20,13 @@ export async function getUserWithRole(role) {
     const user = await users.findOne({ role });
     return user;
 }
+
+export async function isAdmin(telegram_id) {
+    const client = new MongoClient(config.MONGO_CLIENT);
+    await client.connect();
+    const db = client.db("kaznax");
+    const users = db.collection("users");
+
+    const user = await users.findOne({ telegram_id, role: "ADMIN" });
+    return user;
+}

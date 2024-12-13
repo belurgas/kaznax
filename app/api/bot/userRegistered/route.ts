@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
           },
           body: JSON.stringify({
             userId: userId,  // Идентификатор пользователя в Telegram
-            message: message, // Сообщение для отправки
+            message: message // Сообщение для отправки
           }),
         });
         

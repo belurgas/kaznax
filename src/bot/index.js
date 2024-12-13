@@ -6,6 +6,7 @@ import { profileCommand } from "./commands/profile.js";
 import { activeComa } from "./commands/active.js";
 import { handleMessage } from "./handlers/messageHandler.js";
 import { callbackHandler } from "./handlers/callbackHandler.js";
+import { adminCommand } from "./commands/admin.js";
 
 export const bot = new Telegraf(config.botToken);
 
@@ -14,6 +15,7 @@ export const bot = new Telegraf(config.botToken);
 bot.command("start", startCommand);
 bot.command("profile", profileCommand);
 bot.command("competition", activeComa)
+bot.command("admin", adminCommand);
 
 bot.on("message", handleMessage);
 

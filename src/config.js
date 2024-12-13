@@ -3,6 +3,7 @@ dotenv.config();
 
 export const config = {
     botToken: process.env.BOT_TOKEN || "",
+    webAppUrlAdmin: process.env.WEB_APP_URL_ADMIN || "",
 
     MONGO_CLIENT: process.env.MONGO_CLIENT || "",
 

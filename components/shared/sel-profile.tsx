@@ -176,7 +176,7 @@ export function ProfileMain() {
         <div className="flex items-center gap-4 justify-center">
           <div className="flex-shrink-0">
             <Avatar className="w-[80px] h-[80px]">
-              <AvatarImage className="w-full h-full" src={userPhoto || ""} />
+              <AvatarImage className="w-full h-full object-cover" src={userPhoto || ""} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>

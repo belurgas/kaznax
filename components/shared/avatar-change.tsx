@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { hapticFeedback } from "@telegram-apps/sdk";
-import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 interface DialogAvatarProps {
   currentName: string | null; // Текущее имя
@@ -32,8 +32,7 @@ export function DialogAvatar({
   const [isOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [inputName, setInputName] = useState<string | null>(currentName);
-  const [imagePreview, setImagePreview] = useState<string>(currentPhoto);
-
+  const [imagePreview, setImagePreview] = useState<string>("");
 
   useEffect(() => {
     setImagePreview(currentPhoto);
@@ -120,15 +119,10 @@ export function DialogAvatar({
             Измените данные ниже или оставьте как есть
           </DialogDescription>
           {imagePreview && (
-            <div className="relative mx-auto w-[150px] h-[150px] rounded-full overflow-hidden">
-              <Image
-                className="object-cover"
-                src={imagePreview}
-                alt="Preview"
-                layout="fill" // Используем fill, чтобы изображение заполнило круг
-                onClick={() => inputFileRef.current?.click()} // Кликаем по скрытому input при клике на изображение
-              />
-            </div>
+            <Avatar className="relative mx-auto w-[150px] h-[150px] rounded-full overflow-hidden">
+              <AvatarImage className="w-full h-full object-cover" src={imagePreview} onClick={() => inputFileRef.current?.click()}/>
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           )}
           <Label className="mx-auto">Нажмите на картинку</Label>
         </DialogHeader>
